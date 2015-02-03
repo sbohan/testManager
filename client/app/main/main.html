@@ -28,14 +28,23 @@
     </p>
   </form>
 
+  <button class="btn btn-default" ng-click="saveChanges()" ng-show="editMode">Save Changes</button>
+  <button class="btn btn-default" ng-click="editMode = true" ng-hide="editMode">Enable Edit</button>
   <h2>Projects</h2>
   <div ng-repeat="project in projects">
-    <h3>Project Name: {{project.name}}</h3>
-    <h4>Project Owner: {{project.owner}}</h4>
+
+    <input ng-model="project.name" ng-show="editMode">
+    <h3 ng-hide="editMode">Project Name: {{project.name}}</h3>
+
+    <input ng-model="project.owner" ng-show="editMode">
+    <h4 ng-hide="editMode">Project Owner: {{project.owner}}</h4>
 
     <div ng-repeat="release in project.releases">
-      <h5>{{release.name}}</h5>
-      <span>{{release.deliveryDate}}</span>
+
+      <input ng-model="release.name" ng-show="editMode">
+      <h5 ng-hide="editMode">{{release.name}}</h5>
+
+      <span ng-bind="release.deliveryDate"></span>
       <span>{{release.status[0]}}</span>
 
       <div ng-repeat="item in release.items">

@@ -15,6 +15,15 @@ angular.module('testManagerApp')
       //socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
+    $scope.saveChanges = function() {
+      _.forEach($scope.projects, function(project){
+        $http.put('/api/projects/'+project._id, project).then(function(res){
+          console.log(res);
+        });
+      });
+      $scope.editMode = false;
+    };
+
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;
